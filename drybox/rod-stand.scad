@@ -16,6 +16,8 @@ holder_nut_d = 7;
 holder_tilt = 5;
 holder_edge_r = 19;
 
+holder_middle = [stand_thick + 2 * holder_wall.x + 20, 40, holder_base.z];
+
 module rod_stand() {
 	difference() {
 		hull() {
@@ -139,12 +141,54 @@ module stand_holder()
 	}
 }
 
+module middle_base()
+{
+	intersection() {
+		cube([holder_middle.x + 5, holder_middle.y + 5, holder_middle.z]);
+		hull() {
+			translate([1, 1, 0])
+				cylinder(r = 1, h = 10, $fn = 64);
+			translate([1, holder_middle.y - 1, 0])
+				rotate([-holder_tilt, 0, 0])
+					cylinder(r = 1, h = 10, $fn = 64);
+			translate([holder_middle.x - 1, 1, 0])
+				cylinder(r = 1, h = 10, $fn = 64);
+			translate([holder_middle.x - 1, holder_middle.y - 1, -2])
+				rotate([-holder_tilt, holder_tilt, 0])
+					cylinder(r = 1, h = 10, $fn = 64);
+		}
+	}
+}
+
+module middle_holder()
+{
+	difference() {
+		middle_base();
+		translate([holder_wall.x + 10, 0, 0])
+			cube([stand_thick, holder_wall.y, holder_base.z]);
+		translate([6, 10, 0])
+			holder_nut();
+		translate([holder_middle.x - 6, holder_middle.y - 10, 0])
+			holder_nut();
+	}
+	translate([10, 0, 0]) {
+		translate([0, 0, holder_base.z])
+			holder_side(false);
+		translate([stand_thick + holder_wall.x, 0, holder_base.z])
+			holder_side(true);
+	}
+}
+
+
 
 if (generate == "rod_stand")
 	rod_stand();
 
 if (generate == "left_holder")
 	stand_holder();
+
+if (generate == "middle_holder")
+	middle_holder();
 
 if (generate == "right_holder")
 	mirror([1, 0, 0])
@@ -154,7 +198,9 @@ if (generate == "all") {
 	translate([0, 100, 0])
 		rod_stand();
 	stand_holder();
-	translate([180, 0, 0])
+	translate([80, 0, 0])
+		middle_holder();
+	translate([195, 0, 0])
 		mirror([1, 0, 0])
 			stand_holder();
 }
