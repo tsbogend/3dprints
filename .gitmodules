@@ -1,0 +1,6 @@
+[submodule "smartmeter-head/openscad-threads"]
+	path = smartmeter-head/openscad-threads
+	url = https://github.com/tsbogend/openscad-threads.git
+[submodule "eap615-mount/openscad-threads"]
+	path = eap615-mount/openscad-threads
+	url = https://github.com/tsbogend/openscad-threads.git
