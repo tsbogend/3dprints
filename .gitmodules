@@ -4,3 +4,9 @@
 [submodule "eap615-mount/openscad-threads"]
 	path = eap615-mount/openscad-threads
 	url = https://github.com/tsbogend/openscad-threads.git
+[submodule "fitting-screw/openscad-threads"]
+	path = fitting-screw/openscad-threads
+	url = https://github.com/tsbogend/openscad-threads.git
+[submodule "fitting-nut/openscad-threads"]
+	path = fitting-nut/openscad-threads
+	url = https://github.com/tsbogend/openscad-threads.git
